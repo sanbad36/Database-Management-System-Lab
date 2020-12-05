@@ -1,0 +1,399 @@
+/*
+
+	ASSIGNMENT NO = 11
+	ROLL NO = 6
+	BATCH NO = T1
+
+Implement aggregation and indexing with suitable example using MongoDB.
+*/
+
+
+> show dbs
+admin  (empty)
+ass1   0.078GB
+assi1  0.078GB
+emp    0.078GB
+local  0.078GB
+> use new
+switched to db new
+> db.createCollection("Employee")
+{ "ok" : 1 }
+> db.Employee.insert({id:1,job_title:"Developer",project:"project_new",salary:40000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:2,job_title:"programmer",project:"project1",salary:12000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:3,job_title:"Developer",project:"project2",salary:26000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:4,job_title:"salesman",project:"e_govr",salary:32000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:5,job_title:"Developer",project:"e_govr",salary:50000})
+
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:6,job_title:"programmer",project:"e_govr",salary:8000})
+
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:7,job_title:"salesman",project:"project_new",salary:5000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:8,job_title:"salesman",project:"project1",salary:15000})
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:9,job_title:"Analsyt",project:"project1",salary:35000})
+
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insert({id:10,job_title:"Analsyt",project:"project2",salary:12000})
+WriteResult({ "nInserted" : 1 })
+> db.student.find(prety())
+2017-09-26T11:37:51.867+0530 ReferenceError: prety is not defined
+> db.student.find(pretty())
+2017-09-26T11:37:57.280+0530 ReferenceError: pretty is not defined
+> db.student.find().pretty()
+> db.EMployee.find().pretty()
+> db.Employee.find().pretty()
+{
+	"_id" : ObjectId("59c9ec4e567885c083e9ad4b"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+{
+	"_id" : ObjectId("59c9eda6567885c083e9ad4c"),
+	"id" : 2,
+	"job_title" : "programmer",
+	"project" : "project1",
+	"salary" : 12000
+}
+{
+	"_id" : ObjectId("59c9edcb567885c083e9ad4d"),
+	"id" : 3,
+	"job_title" : "Developer",
+	"project" : "project2",
+	"salary" : 26000
+}
+{
+	"_id" : ObjectId("59c9edf0567885c083e9ad4e"),
+	"id" : 4,
+	"job_title" : "salesman",
+	"project" : "e_govr",
+	"salary" : 32000
+}
+{
+	"_id" : ObjectId("59c9ee07567885c083e9ad4f"),
+	"id" : 5,
+	"job_title" : "Developer",
+	"project" : "e_govr",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("59c9ee31567885c083e9ad50"),
+	"id" : 6,
+	"job_title" : "programmer",
+	"project" : "e_govr",
+	"salary" : 8000
+}
+{
+	"_id" : ObjectId("59c9ee50567885c083e9ad51"),
+	"id" : 7,
+	"job_title" : "salesman",
+	"project" : "project_new",
+	"salary" : 5000
+}
+{
+	"_id" : ObjectId("59c9ee6a567885c083e9ad52"),
+	"id" : 8,
+	"job_title" : "salesman",
+	"project" : "project1",
+	"salary" : 15000
+}
+{
+	"_id" : ObjectId("59c9ee8f567885c083e9ad53"),
+	"id" : 9,
+	"job_title" : "Analsyt",
+	"project" : "project1",
+	"salary" : 35000
+}
+{
+	"_id" : ObjectId("59c9ee9f567885c083e9ad54"),
+	"id" : 10,
+	"job_title" : "Analsyt",
+	"project" : "project2",
+	"salary" : 12000
+}
+> db.Employee.find()
+{ "_id" : ObjectId("59c9ec4e567885c083e9ad4b"), "id" : 1, "job_title" : "Developer", "project" : "project_new", "salary" : 40000 }
+{ "_id" : ObjectId("59c9eda6567885c083e9ad4c"), "id" : 2, "job_title" : "programmer", "project" : "project1", "salary" : 12000 }
+{ "_id" : ObjectId("59c9edcb567885c083e9ad4d"), "id" : 3, "job_title" : "Developer", "project" : "project2", "salary" : 26000 }
+{ "_id" : ObjectId("59c9edf0567885c083e9ad4e"), "id" : 4, "job_title" : "salesman", "project" : "e_govr", "salary" : 32000 }
+{ "_id" : ObjectId("59c9ee07567885c083e9ad4f"), "id" : 5, "job_title" : "Developer", "project" : "e_govr", "salary" : 50000 }
+{ "_id" : ObjectId("59c9ee31567885c083e9ad50"), "id" : 6, "job_title" : "programmer", "project" : "e_govr", "salary" : 8000 }
+{ "_id" : ObjectId("59c9ee50567885c083e9ad51"), "id" : 7, "job_title" : "salesman", "project" : "project_new", "salary" : 5000 }
+{ "_id" : ObjectId("59c9ee6a567885c083e9ad52"), "id" : 8, "job_title" : "salesman", "project" : "project1", "salary" : 15000 }
+{ "_id" : ObjectId("59c9ee8f567885c083e9ad53"), "id" : 9, "job_title" : "Analsyt", "project" : "project1", "salary" : 35000 }
+{ "_id" : ObjectId("59c9ee9f567885c083e9ad54"), "id" : 10, "job_title" : "Analsyt", "project" : "project2", "salary" : 12000 }
+
+> db.Employee.find({job_title:"Developer"})
+{ "_id" : ObjectId("59c9ec4e567885c083e9ad4b"), "id" : 1, "job_title" : "Developer", "project" : "project_new", "salary" : 40000 }
+{ "_id" : ObjectId("59c9edcb567885c083e9ad4d"), "id" : 3, "job_title" : "Developer", "project" : "project2", "salary" : 26000 }
+{ "_id" : ObjectId("59c9ee07567885c083e9ad4f"), "id" : 5, "job_title" : "Developer", "project" : "e_govr", "salary" : 50000 }
+> db.Employee.find({job_title:"Developer"}).pretty()
+{
+	"_id" : ObjectId("59c9ec4e567885c083e9ad4b"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+{
+	"_id" : ObjectId("59c9edcb567885c083e9ad4d"),
+	"id" : 3,
+	"job_title" : "Developer",
+	"project" : "project2",
+	"salary" : 26000
+}
+{
+	"_id" : ObjectId("59c9ee07567885c083e9ad4f"),
+	"id" : 5,
+	"job_title" : "Developer",
+	"project" : "e_govr",
+	"salary" : 50000
+}
+> db.Employee.find({$and:[{job_title:"Analsyt"},{salary:{$gte:25000}}]})
+{ "_id" : ObjectId("59c9ee8f567885c083e9ad53"), "id" : 9, "job_title" : "Analsyt", "project" : "project1", "salary" : 35000 }
+> db.Employee.aggregate([{$match:{"project":"e_govr"}},{$group:{_id:null,total_salary:{$sum:"$salary"}}}])
+{ "_id" : null, "total_salary" : 90000 }
+
+//minimum salary
+ db.Employee.aggregate([{$match:{"job_title":"salesman"}},{$group:{_id:null,min_salary:{$min:"$salary"}}}])
+{ "_id" : null, "min_salary" : 5000 }
+//maximumm salary
+db.Employee.aggregate([{$match:{"job_title":"salesman"}},{$group:{_id:null,max_salary:{$max:"$salary"}}}])
+{ "_id" : null, "max_salary" : 32000 }
+//average salary
+ db.Employee.aggregate([{$match:{"project":"e_govr"}},{$group:{_id:null,avg_salary:{$avg:"$salary"}}}])
+{ "_id" : null, "avg_salary" : 30000 }
+//first saalry
+> db.Employee.aggregate([{$group:{_id:null,first_salary:{$first:"$salary"}}}])
+{ "_id" : null, "first_salary" : 40000 }
+//last salary
+ db.Employee.aggregate([{$group:{_id:null,first_salary:{$last:"$salary"}}}])
+{ "_id" : null, "first_salary" : 12000 }
+//average salary of all employee
+ db.Employee.aggregate([{$group:{_id:null,first_salary:{$avg:"$salary"}}}])
+{ "_id" : null, "first_salary" : 23500 }
+
+> db.Employee.aggregate([{$sort:{od:1}}]).pretty();
+{
+	"_id" : ObjectId("59dd0c68d7ec5d0ac9eae4e0"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+{
+	"_id" : ObjectId("59dd0c76d7ec5d0ac9eae4e1"),
+	"id" : 2,
+	"job_title" : "programmer",
+	"project" : "project1",
+	"salary" : 12000
+}
+{
+	"_id" : ObjectId("59dd0c82d7ec5d0ac9eae4e2"),
+	"id" : 3,
+	"job_title" : "Developer",
+	"project" : "project2",
+	"salary" : 26000
+}
+{
+	"_id" : ObjectId("59dd0c8cd7ec5d0ac9eae4e3"),
+	"id" : 4,
+	"job_title" : "salesman",
+	"project" : "e_govr",
+	"salary" : 32000
+}
+{
+	"_id" : ObjectId("59dd0c98d7ec5d0ac9eae4e4"),
+	"id" : 5,
+	"job_title" : "Developer",
+	"project" : "e_govr",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("59dd0cafd7ec5d0ac9eae4e5"),
+	"id" : 6,
+	"job_title" : "programmer",
+	"project" : "e_govr",
+	"salary" : 8000
+}
+{
+	"_id" : ObjectId("59dd0cb9d7ec5d0ac9eae4e6"),
+	"id" : 7,
+	"job_title" : "salesman",
+	"project" : "project_new",
+	"salary" : 5000
+}
+{
+	"_id" : ObjectId("59dd0cc8d7ec5d0ac9eae4e7"),
+	"id" : 8,
+	"job_title" : "salesman",
+	"project" : "project1",
+	"salary" : 15000
+}
+{
+	"_id" : ObjectId("59dd0cd2d7ec5d0ac9eae4e8"),
+	"id" : 9,
+	"job_title" : "Analsyt",
+	"project" : "project1",
+	"salary" : 35000
+}
+{
+	"_id" : ObjectId("59dd0cdfd7ec5d0ac9eae4e9"),
+	"id" : 10,
+	"job_title" : "Analsyt",
+	"project" : "project2",
+	"salary" : 12000
+}
+> db.Employee.aggregate([{$sort:{id:-1}}]).pretty();
+{
+	"_id" : ObjectId("59dd0cdfd7ec5d0ac9eae4e9"),
+	"id" : 10,
+	"job_title" : "Analsyt",
+	"project" : "project2",
+	"salary" : 12000
+}
+{
+	"_id" : ObjectId("59dd0cd2d7ec5d0ac9eae4e8"),
+	"id" : 9,
+	"job_title" : "Analsyt",
+	"project" : "project1",
+	"salary" : 35000
+}
+{
+	"_id" : ObjectId("59dd0cc8d7ec5d0ac9eae4e7"),
+	"id" : 8,
+	"job_title" : "salesman",
+	"project" : "project1",
+	"salary" : 15000
+}
+{
+	"_id" : ObjectId("59dd0cb9d7ec5d0ac9eae4e6"),
+	"id" : 7,
+	"job_title" : "salesman",
+	"project" : "project_new",
+	"salary" : 5000
+}
+{
+	"_id" : ObjectId("59dd0cafd7ec5d0ac9eae4e5"),
+	"id" : 6,
+	"job_title" : "programmer",
+	"project" : "e_govr",
+	"salary" : 8000
+}
+{
+	"_id" : ObjectId("59dd0c98d7ec5d0ac9eae4e4"),
+	"id" : 5,
+	"job_title" : "Developer",
+	"project" : "e_govr",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("59dd0c8cd7ec5d0ac9eae4e3"),
+	"id" : 4,
+	"job_title" : "salesman",
+	"project" : "e_govr",
+	"salary" : 32000
+}
+{
+	"_id" : ObjectId("59dd0c82d7ec5d0ac9eae4e2"),
+	"id" : 3,
+	"job_title" : "Developer",
+	"project" : "project2",
+	"salary" : 26000
+}
+{
+	"_id" : ObjectId("59dd0c76d7ec5d0ac9eae4e1"),
+	"id" : 2,
+	"job_title" : "programmer",
+	"project" : "project1",
+	"salary" : 12000
+}
+{
+	"_id" : ObjectId("59dd0c68d7ec5d0ac9eae4e0"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+
+> db.Employee.aggregate([{$sort:{id:-1}},{$group:{_id:null,average:{$avg:"$salary"}}}])
+{ "_id" : null, "average" : 23500 }
+> db.Employee.aggregate([{$sort:{id:1}},{$group:{_id:null,minimum_sal:{$min:"$salary"}}}])
+{ "_id" : null, "minimum_sal" : 5000 }
+> db.Employee.aggregate([{$sort:{id:1}},{$group:{_id:null,maximum_sal:{$max:"$salary"}}}])
+{ "_id" : null, "maximum_sal" : 50000 }
+> db.Employee.aggregate([{$sort:{id:1}},{$group:{_id:null,first_sal:{$first:"$salary"}}}])
+{ "_id" : null, "first_sal" : 40000 }
+	> db.Employee.find().skip(0).limit(1).pretty()
+{
+	"_id" : ObjectId("59dd0c68d7ec5d0ac9eae4e0"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+> db.Employee.find().skip(9).pretty()
+{
+	"_id" : ObjectId("59dd0cdfd7ec5d0ac9eae4e9"),
+	"id" : 10,
+	"job_title" : "Analsyt",
+	"project" : "project2",
+	"salary" : 12000
+}
+> db.Employee.find().limit(1).pretty();
+{
+	"_id" : ObjectId("59dd0c68d7ec5d0ac9eae4e0"),
+	"id" : 1,
+	"job_title" : "Developer",
+	"project" : "project_new",
+	"salary" : 40000
+}
+> db.Employee.createIndex({id:1,salary:1},{collation:{locale:"fr"}})
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> db.Employee.find({id:1})
+{ "_id" : ObjectId("59dd0c68d7ec5d0ac9eae4e0"), "id" : 1, "job_title" : "Developer", "project" : "project_new", "salary" : 40000 }
+> db.Employee.getIndexes()
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "new.Employee"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"id" : 1,
+			"salary" : 1
+		},
+		"name" : "id_1_salary_1",
+		"ns" : "new.Employee",
+		"collation" : {
+			"locale" : "fr",
+			"caseLevel" : false,
+			"caseFirst" : "off",
+			"strength" : 3,
+			"numericOrdering" : false,
+			"alternate" : "non-ignorable",
+			"maxVariable" : "punct",
+			"normalization" : false,
+			"backwards" : false,
+			"version" : "57.1"
+		}
+	}
+]
+

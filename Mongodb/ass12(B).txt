@@ -1,0 +1,81 @@
+/*
+	ASSIGNMENT NO = 12
+	ROLL NO = 6
+	BATCH NO = T1
+
+Implement Map reduces operation with suitable example using MongoDB
+
+*/
+
+ use trail
+switched to db trail
+> db.createCollection("nc")
+{ "ok" : 0, "errmsg" : "collection already exists" }
+> db.createCollection("nc1")
+{ "ok" : 1 }
+> db.nc1.insert({Name:"neha",marks:90})
+WriteResult({ "nInserted" : 1 })
+> db.nc1.insert({Name:"netra",marks:85})
+WriteResult({ "nInserted" : 1 })
+> db.nc1.insert({Name:"raj",marks:75})
+WriteResult({ "nInserted" : 1 })
+> db.nc1.find().pretty()
+{
+	"_id" : ObjectId("59d47ab7121bc7a03f47f951"),
+	"Name" : "neha",
+	"marks" : 90
+}
+{
+	"_id" : ObjectId("59d47ac6121bc7a03f47f952"),
+	"Name" : "netra",
+	"marks" : 85
+}
+{
+	"_id" : ObjectId("59d47ad0121bc7a03f47f953"),
+	"Name" : "raj",
+	"marks" : 75
+}
+> db.nc1.mapReduce(
+... function(){emit(this.Name,1)},
+... function(key,values){return Array.sum(values)},
+... {out:"Name_total"})
+{
+	"result" : "Name_total",
+	"timeMillis" : 3,
+	"counts" : {
+		"input" : 3,
+		"emit" : 3,
+		"reduce" : 0,
+		"output" : 3
+	},
+	"ok" : 1
+}
+> db.nc1.mapReduce( function(){emit(this.Name,1)}, function(key,values){return Array.sum(values)}, {out:"Name_total"}).find()
+{ "_id" : "neha", "value" : 1 }
+{ "_id" : "netra", "value" : 1 }
+{ "_id" : "raj", "value" : 1 }
+> db.nc1.mapReduce( function(){emit(this.Name,this.marks)}, function(key,values){return Array.sum(values)}, {out:"Name_total"}).find()
+{ "_id" : "neha", "value" : 90 }
+{ "_id" : "netra", "value" : 85 }
+{ "_id" : "raj", "value" : 75 }
+> db.nc1.mapReduce( function(){emit(this.Name,this.marks)}, function(key,values){return Array.sum(values)}, {out:"Name_total"}).find().sort({value:1})
+
+{ "_id" : "raj", "value" : 75 }
+{ "_id" : "netra", "value" : 85 }
+{ "_id" : "neha", "value" : 90 }
+> db.nc1.mapReduce( function(){emit(this.Name,this.marks)}, function(key,values){return Array.sum(values)}, {out:"Name_total"}).find().sort({value:-1})
+{ "_id" : "neha", "value" : 90 }
+{ "_id" : "netra", "value" : 85 }
+{ "_id" : "raj", "value" : 75 }
+> db.nc1.mapReduce( function(){emit(this.Name,this.marks)}, function(key,values){return Array.sum(values)}, {query:{marks:{$gt:75}},out:"Name_total"}).find()
+{ "_id" : "neha", "value" : 90 }
+{ "_id" : "netra", "value" : 85 }
+> 
+var mapfun1=function(){    if(this.marks>75)     emit(this.name,"pass");    };
+> var reducefun2=function(key,values){   return Array.sum(values); };
+> db.nc1.mapReduce( mapfun1,reducefun2, {out:"Example"} ).find().pretty()
+//output
+{ "_id" : "neha", "value" : "pass" }
+{ "_id" : "netra", "value" : "pass" }
+{ "_id" : "nikita", "value" : "pass" }
+
